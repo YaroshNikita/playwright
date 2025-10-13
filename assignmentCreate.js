@@ -55,6 +55,7 @@ const{chromium} = require('playwright');
     await confirmDeletebutton.click()
     await page.waitForTimeout(2000) //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     await page.screenshot({path:'deleted.png'})
-    
+
     await browser.close()
+    
 }) ()
