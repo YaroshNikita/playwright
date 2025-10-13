@@ -1,3 +1,11 @@
+    //const signIn = await page.$('.form-button') by class, . for class, # for id
+    //const signIn = await page.$('button') by css-selector
+    //const signIn = await page.$('//button[@class = "form-button signin"]') //by xpath
+    //const signIn = await page.$('text="Log in"') //by text
+    //const signIn = await page.$('"Log in"') //by text
+    //const signIn = await page.$("form >> "Log in'"") //by text inside the element
+    //const bookSelection = await page.getByText('Nikita book') by text
+
 const{chromium} = require('playwright');
 
 (async() => {
@@ -6,30 +14,22 @@ const{chromium} = require('playwright');
 
     const page = await context.newPage()
     await page.goto('https://app.mars.magmamath.com')
-    
-    //const signIn = await page.$('.form-button') by class
-    //const signIn = await page.$('button') by css-selector
-    //const signIn = await page.$('//button[@class = "form-button signin"]') //by xpath
-    //const signIn = await page.$('text="Log in"') //by text
+
       
     const input = await page.$$('input')
-       await input[0].fill('nikita@test.com')
+       await input[0].fill('newpractice@test.com')
        await input[1].fill('123456')
 
-     //await page.fill('input', 'vovochka_1999')  
-
-
-    const passwordVisibilityIcon = await page.$('//div[@class="show-password-icon"]')
+    const passwordVisibilityIcon = await page.$('//button[@class="_EyeIcon_19med_87"]')
     await passwordVisibilityIcon.click()
-
-    const signIn = await page.$('button >> "Log in"') //by xpath
+    const signIn = await page.$('//button[@type="submit"]') //by xpath
     await signIn.click()
     await page.waitForTimeout(4500) //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    const newAssignment = await page.$('button[class="ui-btn ui-btn-primary ui-btn-medium ui-btn-gradient"]')  
+    const newAssignment = await page.$('//div[@class="_Content_9qfmy_312 _SubmitBtnContent_tmutz_20"]')  
     await newAssignment.click()
     await page.waitForTimeout(1500) //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    const bookSelection = await page.$("//div[text()='Fannys american test b00k']")  
+    const bookSelection = await page.getByText('Nikita book').click();
     await bookSelection.click()
     const chapterSelection = await page.$("//div[text()='Bug protocol']")  
     await chapterSelection.click()  
@@ -57,5 +57,5 @@ const{chromium} = require('playwright');
     await page.screenshot({path:'deleted.png'})
 
     await browser.close()
-    
+
 }) ()
