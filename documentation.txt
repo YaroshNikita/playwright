@@ -1,4 +1,3 @@
-/*
 
 npm install	- Installs all packages listed in your project’s package.json
 npm install <package>	 - Installs a specific package
@@ -42,4 +41,4 @@ const arrayList = await page.$$eval('.class', els => els.map(el => el.textConten
 Читать текст (element.textContent)
 Читать атрибуты (element.getAttribute('href'))
 Изменять элементы (element.style.color = 'red')
-Нажимать (element.click() — хотя обычно лучше использовать page.click()
+Нажимать element.click() — хотя обычно лучше использовать page.click() 
