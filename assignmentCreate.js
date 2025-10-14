@@ -1,11 +1,3 @@
-    //const signIn = await page.$('.form-button') by class, . for class, # for id
-    //const signIn = await page.$('button') by css-selector
-    //const signIn = await page.$('//button[@class = "form-button signin"]') //by xpath
-    //const signIn = await page.$('text="Log in"') //by text
-    //const signIn = await page.$('"Log in"') //by text
-    //const signIn = await page.$("form >> "Log in'"") //by text inside the element
-    //const bookSelection = await page.getByText('Nikita book') by text
-
 const{chromium} = require('playwright');
 
 (async() => {
@@ -30,7 +22,7 @@ const{chromium} = require('playwright');
     await newAssignment.click()
     await page.waitForTimeout(1500) //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     const bookSelection = await page.getByText('Nikita book').click();
-    await bookSelection.click()
+    //await bookSelection.click()
     const chapterSelection = await page.$("//div[text()='Bug protocol']")  
     await chapterSelection.click()  
     const subChapterSelection = await page.$("//div[text()='Standard test']")  
