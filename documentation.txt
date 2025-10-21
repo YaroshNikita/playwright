@@ -42,3 +42,18 @@ const arrayList = await page.$$eval('.class', els => els.map(el => el.textConten
 Читать атрибуты (element.getAttribute('href'))
 Изменять элементы (element.style.color = 'red')
 Нажимать element.click() — хотя обычно лучше использовать page.click() 
+
+
+Key Navigation Methods:
+page.goto(url, options)	Navigate to the given URL. 
+page.reload(options)	Reload the current page. 
+page.goBack(options)	Navigate back in the browser history. 
+page.goForward(options)	Navigate forward in the browser history. 
+page.waitForURL(urlOrPattern, options)	Wait until the main frame’s URL matches the given pattern. 
+page.waitForLoadState(state, options)	Wait for the page to reach a specific load state (load, domcontentloaded, networkidle). 
+https://playwright.dev/docs/api/class-page
+
+
+await page.waitForSelector('selector'); - Waits until the element is in the DOM and visible.
+const element = await page.$('selector'); - Then finds it and assigns to newAssignment.
+await newelement.click(); - action

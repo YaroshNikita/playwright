@@ -24,7 +24,7 @@ const ssoList = await page.$$eval('._Typography_1ki3q_1._HeadingNine_1ki3q_50._T
 console.log(ssoList);
 expect(ssoList).toStrictEqual(["Google", "Microsoft", "Skolfederation", "Skolon", "Magma QR-kod"])
 
-//#3
+//#4
 const ssoCount = await page.$$eval('._Typography_1ki3q_1._HeadingNine_1ki3q_50._Text_nrl0w_13._BuenosAires_1ki3q_100', els => els.length)
 console.log(ssoCount);
 expect(ssoCount).toEqual(5)
