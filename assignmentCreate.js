@@ -3,7 +3,6 @@ const{chromium} = require('playwright');
 (async() => {
     const browser = await chromium.launch({headless: false, slowMo: 300})
     const context = await browser.newContext()
-
     const page = await context.newPage()
     
     await page.goto('https://app.mars.magmamath.com')
@@ -34,7 +33,7 @@ const{chromium} = require('playwright');
     const confirmDeletebutton = await page.$("//button[@type='submit']")  
     await confirmDeletebutton.click()
     await page.waitForTimeout(2000) //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    await page.screenshot({path:'deleted.png'})
+    await page.screenshot({path:'deleted.png', fullPage: true})
 
     await browser.close()
 

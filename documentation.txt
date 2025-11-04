@@ -5,15 +5,20 @@ npm uninstall <package>	- Removes a package
 npm update	- Updates all packages
 npm -v	- Shows npm version
 
-nvm install 20
+nvm install 20 (version)
 nvm install 21
 nvm use 20   # switch to Node 20
 nvm use 21  # switch to Node 21
 
 node <file> - launch script
 npx playwright codegen https://example.com - Opens browser and records test steps
+npx playwright open https://example.com - Opens browser + allows to use playwright locators in browser console
+set PWDEBUG=1 && node filename.js - PW inspector windows CMD
+$env:PWDEBUG=1; node filename.js - PW inspector windows Powershell
+PWDEBUG=1 node filename.js - PW inspector MacOs
+await page.pause()
 
-
+LOCATORS EXAMPLES
 const signIn = await page.$('.form-button') by class, . for class, # for id
 const signIn = await page.$('button') by css-selector
 const signIn = await page.$('//button[@class = "form-button signin"]') //by xpath
@@ -26,17 +31,14 @@ const bookSelection = await page.getByText('Nikita book') by text
 page.$()	Находит один элемент по селектору (аналог document.querySelector())
 page.$$()	Находит все элементы, подходящие под селектор (аналог document.querySelectorAll())
 
-
 page.$eval()	Находит элемент и выполняет JavaScript-код внутри браузера над этим элементом
 <p id="greeting">Hello, Nikita!</p>
 const text = await page.$eval('#greeting', element => element.textContent);
-
 
 page.$$eval()	Находит несколько элементов и выполняет код над всеми
 const arrayList = await page.$$eval('.class', els => els.map(el => el.textContent))
 //els => els[0].textContent	Возвращает строку
 //els => els.map(el => el.textContent)	Возвращает массив
-
 
 Читать текст (element.textContent)
 Читать атрибуты (element.getAttribute('href'))
@@ -44,7 +46,7 @@ const arrayList = await page.$$eval('.class', els => els.map(el => el.textConten
 Нажимать element.click() — хотя обычно лучше использовать page.click() 
 
 
-Key Navigation Methods:
+PAGE NAVIGATION METHODS
 page.goto(url, options)	Navigate to the given URL. 
 page.reload(options)	Reload the current page. 
 page.goBack(options)	Navigate back in the browser history. 
@@ -54,6 +56,17 @@ page.waitForLoadState(state, options)	Wait for the page to reach a specific load
 https://playwright.dev/docs/api/class-page
 
 
+AWAITS
 await page.waitForSelector('selector'); - Waits until the element is in the DOM and visible.
 const element = await page.$('selector'); - Then finds it and assigns to newAssignment.
 await newelement.click(); - action
+
+
+page.screenshot({path:'deleted.png', fullPage: true}) - screnshot take
+
+
+TESTS
+npx playwright test (tests run)
+npx playwright test --headed (without headless mode)
+npx playwright test firstTest.js (specific file run)
+npx playwright test -g "firstTest" (specific test run)

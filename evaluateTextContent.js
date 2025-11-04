@@ -27,6 +27,7 @@ expect(ssoList).toStrictEqual(["Google", "Microsoft", "Skolfederation", "Skolon"
 //#4
 const ssoCount = await page.$$eval('._Typography_1ki3q_1._HeadingNine_1ki3q_50._Text_nrl0w_13._BuenosAires_1ki3q_100', els => els.length)
 console.log(ssoCount);
+//debugger
 expect(ssoCount).toEqual(5)
 //els => els[0].textContent	Возвращает строку
 //els => els.map(el => el.textContent)	Возвращает массив
