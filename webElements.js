@@ -28,3 +28,5 @@ const{chromium} = require('playwright');
     // await page.screenshot({path:'todo.png'})
     // await browser.close()
 }) ()
+
+(async() => {}) ()

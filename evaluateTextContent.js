@@ -1,7 +1,7 @@
 const{chromium} = require('playwright');
 const expect = require('expect').expect;
 
-(async() => {
+(async () => {
     const browser = await chromium.launch({headless: false, slowMo: 300})
     const context = await browser.newContext()
 
@@ -9,7 +9,7 @@ const expect = require('expect').expect;
     await page.goto('https://app.mars.matteappen.se/')
 
 //#1
-const sso = await page.$$('._Typography_1ki3q_1._HeadingNine_1ki3q_50._Text_nrl0w_13._BuenosAires_1ki3q_100')
+const sso = await page.$$('_Typography_1ki3q_1 _HeadingNine_1ki3q_50 _Text_3jgwx_17 _BuenosAires_1ki3q_100')
 const skolon = await sso[3].evaluate(el => el.textContent)
 console.log(skolon);
 expect(skolon).toBe('Skolon')
@@ -31,6 +31,7 @@ console.log(ssoCount);
 expect(ssoCount).toEqual(5)
 //els => els[0].textContent	Возвращает строку
 //els => els.map(el => el.textContent)	Возвращает массив
-
+await context.close();
 await browser.close()
 }) ()
+

@@ -70,3 +70,4 @@ npx playwright test (tests run)
 npx playwright test --headed (without headless mode)
 npx playwright test firstTest.js (specific file run)
 npx playwright test -g "firstTest" (specific test run)
+npx playwright test --grep @smoke 

@@ -21,7 +21,7 @@ const{chromium} = require('playwright');
     const newAssignment = await page.$('//div[@class="_Content_9qfmy_312 _SubmitBtnContent_tmutz_20"]').click()  
     //await page.waitForSelector('//div[@class="_Content_9qfmy_312 _SubmitBtnContent_tmutz_20"]').click() // wait for selector is visible
 
-    const bookSelection = await page.getByText('Nikita book').click();
+    const bookSelection = await page.getByText('Nikita book').click()
     await bookSelection.click()
 
     //await page.screenshot({path:'created.png'})
