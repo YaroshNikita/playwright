@@ -1,3 +1,4 @@
+const {test, expect } = require("playwright/test");
 const{chromium} = require('playwright');
 
 (async() => {
@@ -8,32 +9,42 @@ const{chromium} = require('playwright');
     await page.goto('https://app.mars.magmamath.com')
 
       
-    const input = await page.$$('input')
-       await input[0].fill('newpractice@test.com')
-       await input[1].fill('123456')
+    const inputEmail = page.locator('input').nth(0);
+    await inputEmail.fill('newpractice@test.com');
+    const inputPassword = page.locator('input').nth(1);
+    await inputPassword.fill('123456');
 
-    const passwordVisibilityIcon = await page.$('//button[@class="_EyeIcon_19med_87"]')
-    await passwordVisibilityIcon.click()
-    const signIn = await page.$('//button[@type="submit"]') //by xpath
-    await signIn.click()
- 
-    await page.waitForSelector('//div[@class="_Content_9qfmy_312 _SubmitBtnContent_tmutz_20"]')
-    const newAssignment = await page.$('//div[@class="_Content_9qfmy_312 _SubmitBtnContent_tmutz_20"]').click()  
-    //await page.waitForSelector('//div[@class="_Content_9qfmy_312 _SubmitBtnContent_tmutz_20"]').click() // wait for selector is visible
+    await page.locator('button._EyeIcon_19med_87').click();
+    await page.locator('button[type="submit"]').click();
 
-    const bookSelection = await page.getByText('Nikita book')
-    await bookSelection.click()
 
-    //await page.screenshot({path:'created.png'})
+    const newAssignmentButton = page.getByTestId('new-assignment-btn')
+    await newAssignmentButton.click();
 
-    const assignmentActionsButton = await page.$('.MuiButtonBase-root')  
-    await assignmentActionsButton.click()
-    const deleteAssignmentAction = await page.$('.Delete')  
-    await deleteAssignmentAction.click()
-    const confirmDeletebutton = await page.$("//button[@type='submit']")  
-    await confirmDeletebutton.click()
-    //await page.waitForTimeout(2000) //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    await page.screenshot({path:'deleted.png', fullPage: true})
+    const testBookSelect = await page.getByText('Nikita book', { exact: true }).click();
+    const chapterSelect = await page.getByText('1. test', { exact: true }).click();
+    const sectionSelect = await page.getByText('1. Super assignment', { exact: true }).click(); 
+    const selectAllProblemsCheckbox = page.getByRole('checkbox', { name: 'Super assignment' }).click();
+
+    const assignmentNameInput = await page.getByTestId('assignment-name-input');
+    await expect(assignmentNameInput).toHaveValue('Super assignment');
+
+    const classCheckboxSelect = await page.getByRole('checkbox', { name: 'auto' }).check();
+
+    const createAssignmentSubmitBtn = await page.getByTestId('create-assignment-submit-btn');
+    await expect(createAssignmentSubmitBtn).toBeEnabled();
+    await createAssignmentSubmitBtn.click();
+
+
+    await expect(page.getByTestId('Super assignment-assignment')).toBeVisible();
+
+    //delete flow
+    await page.getByTestId('Super assignment-assignment-options-btn').nth(0).click();
+    await page.getByTestId('Super assignment-delete-exercise-btn').click();
+    const asignmentDeleteConfirmationButton = await page.getByTestId('confirm-delete-exercise-btn');
+    await asignmentDeleteConfirmationButton.click();
+    await expect(page.getByTestId('Super assignment-assignment')).not.toBeVisible();
+    //await page.screenshot({path:'deleted.png', fullPage: true})
 
     await browser.close()
 
