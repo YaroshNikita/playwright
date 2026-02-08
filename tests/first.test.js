@@ -15,7 +15,7 @@ test('firstTest @smoke', async ({ page }) => {
   '._Typography_1ki3q_1._HeadingNine_1ki3q_50._Text_3jgwx_17._BuenosAires_1ki3q_100',
   el => el[0].textContent);
 debugger
-expect(google).toBe('Google') */
+expect(google).toBe('Google') */ 
 
 await expect(page.getByText('Google')).toBeVisible();
 })
