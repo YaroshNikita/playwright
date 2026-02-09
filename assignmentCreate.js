@@ -36,7 +36,7 @@ const{chromium} = require('playwright');
     await createAssignmentSubmitBtn.click();
 
 
-    await expect(page.getByTestId('Super assignment-assignment')).toBeVisible();
+    await expect(page.getByTestId('Super assignment-assignment').first()).toBeVisible();
 
     //delete flow
     await page.getByTestId('Super assignment-assignment-options-btn').nth(0).click();
