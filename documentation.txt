@@ -71,3 +71,7 @@ npx playwright test --headed (without headless mode)
 npx playwright test firstTest.js (specific file run)
 npx playwright test -g "firstTest" (specific test run)
 npx playwright test --grep @smoke 
+
+
+На любом устройстве после git clone/pull просто запускай npm install ➜ npx playwright install.
+ Это ставит точные версии зависимостей и браузеров под конкретную ОС.
