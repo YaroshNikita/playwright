@@ -26,8 +26,7 @@ const assignmentLocators = {
 };
 
 const answerLocators = {
-  singleChoiceOption: (page) => page.locator('div.answer-variant-text-and-icon'),
-  multipleChoiceOption: (page, optionText) => page.getByRole('checkbox', { name: optionText }),
+  choiceButton: (page) => page.locator('div.answer-variant-text-and-icon'),
   orderedChoiceOption: (page, optionText) => page.getByRole('option', { name: optionText }),
   submitAnswerButton: (page) => page.locator("#SUBMIT_ANSWER_BUTTON"),
 };
