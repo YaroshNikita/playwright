@@ -1,5 +1,6 @@
-const {test, expect } = require("playwright/test");
-const{chromium} = require('playwright');
+const {expect} = require("playwright/test");
+const {chromium} = require('playwright');
+const {loginLocators, assignmentLocators} = require('./locators');
 
 (async() => {
     const browser = await chromium.launch({headless: false, slowMo: 300})
@@ -8,43 +9,26 @@ const{chromium} = require('playwright');
     
     await page.goto('https://app.mars.magmamath.com')
 
-      
-    const inputEmail = page.locator('input').nth(0);
-    await inputEmail.fill('newpractice@test.com');
-    const inputPassword = page.locator('input').nth(1);
-    await inputPassword.fill('123456');
+    // Login
+    await loginLocators.emailInput(page).fill('auto@test.com');
+    await loginLocators.passwordInput(page).fill('123456');
+    await loginLocators.loginButton(page).click();
 
-    await page.locator('button._EyeIcon_19med_87').click();
-    await page.locator('button[type="submit"]').click();
+    // Create assignment
+    await assignmentLocators.newAssignmentButton(page).click();
+    await assignmentLocators.BookOption(page).click();
+    await assignmentLocators.chapterOption(page).click();
+    await assignmentLocators.sectionOption(page).click();
+    await assignmentLocators.selectAllProblemsCheckbox(page).click();
 
+    await expect(assignmentLocators.assignmentNameInput(page)).toHaveValue('auto problems');
 
-    const newAssignmentButton = page.getByTestId('new-assignment-btn')
-    await newAssignmentButton.click();
+    await assignmentLocators.classCheckbox(page).check();
 
-    const testBookSelect = await page.getByText('Nikita book', { exact: true }).click();
-    const chapterSelect = await page.getByText('1. test', { exact: true }).click();
-    const sectionSelect = await page.getByText('1. Super assignment', { exact: true }).click(); 
-    const selectAllProblemsCheckbox = page.getByRole('checkbox', { name: 'Super assignment' }).click();
+    await expect(assignmentLocators.createAssignmentSubmitButton(page)).toBeEnabled();
+    await assignmentLocators.createAssignmentSubmitButton(page).click();
 
-    const assignmentNameInput = await page.getByTestId('assignment-name-input');
-    await expect(assignmentNameInput).toHaveValue('Super assignment');
-
-    const classCheckboxSelect = await page.getByRole('checkbox', { name: 'auto' }).check();
-
-    const createAssignmentSubmitBtn = await page.getByTestId('create-assignment-submit-btn');
-    await expect(createAssignmentSubmitBtn).toBeEnabled();
-    await createAssignmentSubmitBtn.click();
-
-
-    await expect(page.getByTestId('Super assignment-assignment').first()).toBeVisible();
-
-    //delete flow
-    await page.getByTestId('Super assignment-assignment-options-btn').nth(0).click();
-    await page.getByTestId('Super assignment-delete-exercise-btn').click();
-    const asignmentDeleteConfirmationButton = await page.getByTestId('confirm-delete-exercise-btn');
-    await asignmentDeleteConfirmationButton.click();
-    await expect(page.getByTestId('Super assignment-assignment')).not.toBeVisible();
-    //await page.screenshot({path:'deleted.png', fullPage: true})
+    await expect(assignmentLocators.assignmentCard(page).first()).toBeVisible();
 
     await browser.close()
 

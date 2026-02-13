@@ -13,19 +13,28 @@ const assignmentLocators = {
   newAssignmentButton: (page) => page.getByTestId('new-assignment-btn'),
   BookOption: (page) => page.getByText('Nikita book', { exact: true }),
   chapterOption: (page) => page.getByText('1. test', { exact: true }),
-  sectionOption: (page) => page.getByText('1. Super assignment', { exact: true }),
-  selectAllProblemsCheckbox: (page) => page.getByRole('checkbox', { name: 'Super assignment' }),
+  sectionOption: (page) => page.getByText('2. auto problems', { exact: true }),
+  selectAllProblemsCheckbox: (page) => page.getByRole('checkbox', { name: 'auto problems' }),
   assignmentNameInput: (page) => page.getByTestId('assignment-name-input'),
-  classCheckbox: (page) => page.getByRole('checkbox', { name: 'auto' }),
+  classCheckbox: (page) => page.getByRole('checkbox', { name: 'auto', exact: true }),
   createAssignmentSubmitButton: (page) => page.getByTestId('create-assignment-submit-btn'),
-  assignmentCard: (page) => page.getByTestId('Super assignment-assignment'),
-  assignmentOptionsButton: (page) => page.getByTestId('Super assignment-assignment-options-btn').nth(0),
-  deleteAssignmentButton: (page) => page.getByTestId('Super assignment-delete-exercise-btn'),
+  assignmentCard: (page) => page.getByTestId('auto problems-assignment'),
+  exerciseCard: (page) => page.getByText('auto problems', { exact: true }),
+  assignmentOptionsButton: (page) => page.getByTestId('auto problems-assignment-options-btn').nth(0),
+  deleteAssignmentButton: (page) => page.getByTestId('auto problems-delete-exercise-btn'),
   confirmDeleteAssignmentButton: (page) => page.getByTestId('confirm-delete-exercise-btn'),
+};
+
+const answerLocators = {
+  singleChoiceOption: (page) => page.locator('div.answer-variant-text-and-icon'),
+  multipleChoiceOption: (page, optionText) => page.getByRole('checkbox', { name: optionText }),
+  orderedChoiceOption: (page, optionText) => page.getByRole('option', { name: optionText }),
+  submitAnswerButton: (page) => page.locator("#SUBMIT_ANSWER_BUTTON"),
 };
 
 module.exports = {
   loginLocators,
   ssoLocators,
   assignmentLocators,
+  answerLocators
 };

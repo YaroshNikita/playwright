@@ -5,6 +5,7 @@ module.exports = defineConfig({
     locale: 'sv-SE',
     timezoneId: 'Europe/Stockholm',
     baseURL: 'https://app.mars.matteappen.se/',
+    //baseURL: 'https://app.magmamath.com/',
     headless: false,
     launchOptions: {
       slowMo: 300,
