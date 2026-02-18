@@ -26,9 +26,12 @@ const assignmentLocators = {
 };
 
 const answerLocators = {
-  choiceButton: (page) => page.locator('div.answer-variant-text-and-icon'),
-  orderedChoiceOption: (page, optionText) => page.getByRole('option', { name: optionText }),
-  submitAnswerButton: (page) => page.locator("#SUBMIT_ANSWER_BUTTON"),
+  inputTypeSelector: (page) => page.getByTestId('input-type-selector-button'),
+  //choiceButton: (page) => page.locator('div.answer-variant-text-and-icon'),
+  choiceButton: (page, index) => page.getByTestId(`choice-variant-${index}`),
+  submitChoiceButton: (page) => page.getByTestId('choice-answer-submit-button'),
+  submitAnswerButton: (page) => page.getByTestId('problem-answer-submit-button'),
+  myscriptDrawingArea: (page) => page.locator(".ms-editor.draw"),
 };
 
 module.exports = {

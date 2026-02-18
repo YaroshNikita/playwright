@@ -56,3 +56,5 @@ async function getDrawingCoordinates(page) {
 }
 
 module.exports = { drawStroke, getDrawingCoordinates };
+
+//аufnction for ordered choice selection --- IGNORE ---
