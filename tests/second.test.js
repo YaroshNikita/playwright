@@ -4,7 +4,7 @@ const { drawStroke, getDrawingCoordinates } = require('./helpers');
 
 test.describe('@smoke tests', () => {
     test.beforeEach(async ({page}) => {
-        await page.goto('http://localhost:3001/');
+        await page.goto('');
         await loginLocators.emailInput(page).fill('autostudent');
         await loginLocators.passwordInput(page).fill('123456');
         await loginLocators.loginButton(page).click();
